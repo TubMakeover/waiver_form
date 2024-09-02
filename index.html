@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tub Makeover Waiver Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-section {
+            margin-bottom: 20px;
+        }
+        .form-section input[type="text"],
+        .form-section input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #printButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tub Makeover - Waiver Form</h1>
+    <p><strong>Please Read and Follow All Instructions to Ensure the Successful Completion of the Service</strong></p>
+    <p>The customer is responsible for removing all valuable items from surfaces, floors, and walls to avoid any potential damage, except for items stored inside cabinets.</p>
+    <p>Tub Makeover is not liable for overspray, dust, or damage to items that have not been removed beforehand.</p>
+    <p>The refinished surface must remain untouched and unused for a period of 2 days following the completion of the service.</p>
+    <p>Using bath mats with suction cups will void the warranty. A care and maintenance guide will be provided to you by the technician and/or can be downloaded at tubmakeover.com.</p>
+    <p>The fumes from the refinishing process typically dissipate within 3 to 6 hours after the work is completed. If you return home and notice a strong odor that causes discomfort, we recommend returning later or keeping doors and windows open to ventilate the area. Sensitivity to these fumes may vary from person to person depending on factors such as age, medical history, and others.</p>
+    <p>It is not safe for pets to be in the area during the refinishing process, as the fumes can be too strong for them, potentially causing respiratory, eye, and stomach irritation. Even after the work is completed, it is advisable to keep pets away until the odor significantly diminishes. The use of fans can help speed up ventilation.</p>
+    <p>If you have a leaky faucet or any other issue that could prevent the technician from completing the work, please contact a specialized service to resolve the problem before the resurfacing technician arrives.</p>
+    <p><strong>NO ONE, INCLUDING PETS, IS ALLOWED TO BE IN THE UNIT DURING THE RESURFACING PROCESS</strong></p>
+
+    <div class="form-section">
+        <label>Please Resurface:</label>
+        <input type="text" id="resurfaceItem" readonly>
+    </div>
+    <div class="form-section">
+        <label>Scheduled for:</label>
+        <input type="text" id="scheduledDate" readonly>
+    </div>
+    <div class="form-section">
+        <label>I,</label>
+        <input type="text" id="customerName" readonly>
+        <label>have read and agree to all the terms in this document. You may proceed with the resurfacing of the selected item(s).</label>
+    </div>
+    <div class="form-section">
+        <label>Property Name:</label>
+        <input type="text" id="propertyName" readonly>
+    </div>
+    <div class="form-section">
+        <label>Apt#:</label>
+        <input type="text" id="apartmentNumber" readonly>
+    </div>
+    <div class="form-section">
+        <label>Customer Signature:</label>
+        <input type="text" id="customerSignature" readonly>
+    </div>
+    <div class="form-section">
+        <label>Date:</label>
+        <input type="date" id="currentDate" readonly>
+    </div>
+    
+    <!-- Button to Print the Form -->
+    <button id="printButton" onclick="window.print()">Print Waiver Form</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // This function simulates fetching POST data for demonstration
+            function getPostData() {
+                // Example data from Calendly (replace this with actual POST data)
+                return {
+                    event_type: "Bathtub Resurfacing",
+                    event_start_time: "2024-09-15T14:00:00Z",
+                    invitee_first_name: "John",
+                    invitee_last_name: "Doe",
+                    location: "Green Acres",
+                    custom_answers: [
+                        { question: "Apartment Number", answer: "123" }
+                    ]
+                };
+            }
+
+            // Extract POST data
+            const postData = getPostData();
+
+            // Fill the form with POST data
+            const resurfaceItem = postData.event_type;
+            const scheduledDate = new Date(postData.event_start_time).toLocaleDateString('en-US');
+            const customerName = `${postData.invitee_first_name} ${postData.invitee_last_name}`;
+            const propertyName = postData.location;
+            const apartmentNumber = postData.custom_answers[0].answer;
+
+            // Set the values in the form fields
+            document.getElementById('resurfaceItem').value = resurfaceItem || 'Not Provided';
+            document.getElementById('scheduledDate').value = scheduledDate || 'Not Provided';
+            document.getElementById('customerName').value = customerName || 'Not Provided';
+            document.getElementById('propertyName').value = propertyName || 'Not Provided';
+            document.getElementById('apartmentNumber').value = apartmentNumber || 'Not Provided';
+            document.getElementById('customerSignature').value = customerName || 'Not Provided';
+
+            // Set the current date
+            document.getElementById('currentDate').value = new Date().toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>
